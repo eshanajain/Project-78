@@ -16,6 +16,7 @@ function update()
 }
 var updateImage = images[i];
 var updateName = name[i];
-
+document.getElementById("family_member_image").src =updateImage;
+document.getElementById("family_member_image").innerHTML =updatedName;
 }
  
