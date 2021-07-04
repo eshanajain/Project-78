@@ -1,22 +1,48 @@
-var images =[
-"https://static.wikia.nocookie.net/barbie/images/3/32/Margaret_Roberts_Dreamhouse_Adventures.png/revision/latest/top-crop/width/360/height/450?cb=20210313000243","https://i.pinimg.com/originals/22/2f/9f/222f9fe1a39db50981b0498595e1160c.png",
-"https://i.pinimg.com/originals/46/10/6f/46106fd1e02cdc508f36f4b5aba29f0e.jpg","https://static.wikia.nocookie.net/barbie-movies/images/e/ec/Chelsea_Princess_Adventure.png/revision/latest?cb=20210211014128","https://i.pinimg.com/736x/be/0b/9d/be0b9da2ec52af61a0bddbc8106c946b.jpg""
-]
+canvas=document.getElementById("myCanvas");
+ctx=canvas.getContext("2d");
 
-var name=["family book","barbie","margreat","george","skipper","chelsy","staicy",]
+var mouseEvent="empty";
+var last_position_of_x,last_position_of_y;
 
-var i =0;
-function update()
-{
-    i++;
-    var number_of_family_member_in_array = 5
-    if(i > number_of_family_member_in_array)
-{
-    i= 0;
+color="red";
+width_of_line=4;
+
+canvas.addEventListener("mousedown",my_mousedown);
+
+function my_mousedown(e){
+    mouseEvent="mouseDown";
 }
-var updateImage = images[i];
-var updateName = name[i];
-document.getElementById("family_member_image").src =updateImage;
-document.getElementById("family_member_image").innerHTML =updatedName;
+canvas.addEventListener("mouseup",my_mouseup);
+
+function my_mouseup(e){
+    mouseEvent="mouseUP";
 }
+canvas.addEventListener("mouseleave",my_mouseleave);
+
+function my_mouseleave(e){
+    mouseEvent="mouseLeave";
+}
+canvas.addEventListener("mousemove",my_mousemove);
+
+function my_mousemove(e){
+ current_position_of_mouse_x=e.clientX-canvas.offsetLeft;
+ current_position_of_mouse_y=e.clientY-canvas.offsetTop;
  
+ if(mouseEvent="mouseDown"){
+
+    ctx.beginPath();
+    ctx.strokeStyle=color;
+    ctx.lineWidth=width_of_line;
+
+    console.log("last position of x and y cordinates = ");
+    console.log("x= "+last_position_of_x+"y="+last_position_of_y);
+    ctx.moveTo(last_position_of_x,last_position_of_y);
+
+    console.log("current position of x and y cordinates = ");
+    console.log("x= "+current_position_of_mouse_x+"y="+current_position_of_mouse_y);
+    ctx.lineTo(current_position_of_mouse_x,current_position_of_mouse_y);
+    ctx.stroke();
+ }
+ last_position_of_x=current_position_of_mouse_x;
+ last_position_of_y=current_position_of_mouse_y;
+}
